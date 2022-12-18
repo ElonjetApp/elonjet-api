@@ -6,9 +6,9 @@ import ServiceEventsHandler from '../controllers/ServiceEventsHandler'
 
 //const elon = new ElonTracker('a4df52', '52', 7);
 const trackers = {
-  N628TS: new ElonTracker('a835af', 'af', 7),
-  N272BG: new ElonTracker('a2ae0a', '0a', 7),
-  N502SX: new ElonTracker('a64304', '04', 7)
+  N628TS: new ElonTracker('a835af', 'af', 3),
+  N272BG: new ElonTracker('a2ae0a', '0a', 3),
+  N502SX: new ElonTracker('a64304', '04', 3)
 }
 
 const api = Router();
