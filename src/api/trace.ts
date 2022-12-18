@@ -4,6 +4,8 @@ import ServiceEventsHandler from '../controllers/ServiceEventsHandler'
 
 const daysBackVal = Number(process.env.DAYS_BACK);
 const daysBack = !isNaN(daysBackVal) ? daysBackVal : 3;
+console.log('DAYS BACK', daysBack);
+
 //const elon = new ElonTracker('a4df52', '52', 7);
 const trackers = {
   N628TS: new ElonTracker('a835af', 'af', daysBack),
