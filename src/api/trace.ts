@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { ElonTracker } from '../services/elon'
+import { ElonTrace, ElonTracker } from '../services/elon'
 import ServiceEventsHandler from '../controllers/ServiceEventsHandler'
 
 
@@ -12,6 +12,15 @@ const trackers = {
 }
 
 const api = Router();
+
+const minifyTrace = (trace: ElonTrace) => {
+  return trace.map(({ datetime, records }) => {
+    return {
+      datetime,
+      records: records ? records.map(({ altitude, longitude, latitude }) => [altitude, latitude, longitude]) : []
+    }
+  });
+}
 
 const serviceEvents = new ServiceEventsHandler();
 
@@ -32,7 +41,7 @@ api.get('/:id', (request, response) => {
       try {
         serviceEvents.send(client.id, {
           type: 'initialization',
-          data: lastTrace
+          data: minifyTrace(lastTrace)
         });
       }
       catch {}
@@ -54,7 +63,7 @@ api.get('/:id', (request, response) => {
         try {
           serviceEvents.send(client.id, {
             type: 'update',
-            data: updateTrace
+            data: minifyTrace(updateTrace)
           });
           lastTrace = currTrace;
         }
