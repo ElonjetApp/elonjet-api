@@ -89,7 +89,7 @@ api.get('/:id', (request, response) => {
       // }, 3000);
     }
     else {
-      response.json(trackers[request.params.id as keyof typeof trackers].trace);
+      response.json(minifyTrace(trackers[request.params.id as keyof typeof trackers].trace));
     }
   }
   else {
