@@ -4,14 +4,9 @@ import corsFirewall from '../util/corsFirewall'
 const router = express.Router();
 
 router.use(corsFirewall([
-  /^(.*\.)?bluepic\.de$/,
-  /^(.*\.)?picforpeace\.org$/,
-  /^(.*\.)?fellowblue\.com$/,
-  /^(.*\.)?maltegallee\.eu$/,
   /^localhost:.*$/,
-  /^capacitor $/,
-  /^creactive.onrender.com$/,
-], 'https://app.bluepic.de'));
+  /^elonjet.app$/,
+], 'https://elonjet.app'));
 
 router.use((req, res, next) => {
   res.header("Access-Control-Allow-Methods", "GET, OPTIONS, POST, PUT, DELETE");
