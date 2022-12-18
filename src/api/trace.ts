@@ -2,13 +2,13 @@ import { Router } from 'express'
 import { ElonTrace, ElonTracker } from '../services/elon'
 import ServiceEventsHandler from '../controllers/ServiceEventsHandler'
 
-
-
+const daysBackVal = Number(process.env.DAYS_BACK);
+const daysBack = !isNaN(daysBackVal) ? daysBackVal : 3;
 //const elon = new ElonTracker('a4df52', '52', 7);
 const trackers = {
-  N628TS: new ElonTracker('a835af', 'af', 3),
-  N272BG: new ElonTracker('a2ae0a', '0a', 3),
-  N502SX: new ElonTracker('a64304', '04', 3)
+  N628TS: new ElonTracker('a835af', 'af', daysBack),
+  N272BG: new ElonTracker('a2ae0a', '0a', daysBack),
+  N502SX: new ElonTracker('a64304', '04', daysBack)
 }
 
 const api = Router();
