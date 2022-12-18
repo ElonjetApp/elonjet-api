@@ -41,10 +41,18 @@ api.get('/:id', (request, response) => {
       let lastTrace = trackers[request.params.id as keyof typeof trackers].trace;
       
       try {
-        serviceEvents.send(client.id, {
-          type: 'initialization',
-          data: minifyTrace(lastTrace)
-        });
+        if (request.query.ignoreInitialization === 'true') {
+          serviceEvents.send(client.id, {
+            type: 'update',
+            data: []
+          });
+        }
+        else {
+          serviceEvents.send(client.id, {
+            type: 'initialization',
+            data: minifyTrace(lastTrace)
+          });
+        }
       }
       catch {}
 
