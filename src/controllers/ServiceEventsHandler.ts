@@ -3,6 +3,17 @@ import uniqid from 'uniqid'
 
 export default class ServiceEventsHandler {
   private clients: { id: string; response: Response }[] = [];
+  private chunkSize = 4096;
+  static sendResponse(response: Response, msg: string, chunkSize: number) {
+    let i = 0;
+    while (msg.length > 0) {
+      const chunk = msg.slice(0, chunkSize);
+      response.write(chunk);
+      console.log('sent chunk', i);
+      i++;
+      msg = msg.slice(chunkSize);
+    }
+  }
   constructor() {
 
   }
@@ -27,7 +38,7 @@ export default class ServiceEventsHandler {
   send(clientId: string, data: any) {
     const client = this.retrieveClient(clientId);
     if (client) {
-      client.response.write(`data: ${JSON.stringify(data)}\n\n`);
+      ServiceEventsHandler.sendResponse(client.response, `data: ${JSON.stringify(data)}\n\n`, this.chunkSize);
     }
     else {
       throw new Error('No client with this id');
