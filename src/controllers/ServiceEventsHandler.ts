@@ -3,7 +3,7 @@ import uniqid from 'uniqid'
 
 export default class ServiceEventsHandler {
   private clients: { id: string; response: Response }[] = [];
-  private chunkSize = 4096;
+  private chunkSize = 32768;
   static sendResponse(response: Response, msg: string, chunkSize: number) {
     let i = 0;
     while (msg.length > 0) {
