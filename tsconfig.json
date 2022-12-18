@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "rootDir": "./src",
+    "target": "ES2022",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+  "include": ["./src"],
+  "exclude": ["node_modules", "frontend/**/*.ts"]
+}
